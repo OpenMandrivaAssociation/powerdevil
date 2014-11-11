@@ -1,0 +1,3 @@
+# Not really libraries (headers aren't shipped etc.)
+# No point in separate -devel packages for convenience libs.
+addFilter("E: devel-file-in-non-devel-package")
