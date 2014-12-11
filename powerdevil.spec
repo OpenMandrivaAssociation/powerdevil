@@ -37,7 +37,8 @@ KDE 5 Power Saving Tools
 %setup -qn %{name}-%{plasmaver}
 %apply_patches
 
-%cmake -G Ninja
+%cmake -G Ninja \
+	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 
 %build
 ninja -C build
@@ -55,9 +56,9 @@ cat *.lang >all.lang
 %{_sysconfdir}/dbus-1/system.d/org.kde.powerdevil.backlighthelper.conf
 %{_libdir}/libexec/kauth/backlighthelper
 %{_libdir}/*.so
-%{_libdir}/plugins/kcm_powerdevil*.so
-%{_libdir}/plugins/kded_powerdevil.so
-%{_libdir}/plugins/powerdevil*.so
+%{_libdir}/qt5/plugins/kcm_powerdevil*.so
+%{_libdir}/qt5/plugins/kded_powerdevil.so
+%{_libdir}/qt5/plugins/powerdevil*.so
 %{_datadir}/dbus-1/system-services/org.kde.powerdevil.*
 %{_datadir}/knotifications5/powerdevil.notifyrc
 %{_datadir}/kservices5/kded/powerdevil.desktop
