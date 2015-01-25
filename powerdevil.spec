@@ -23,6 +23,7 @@ BuildRequires: cmake(KF5KIO)
 BuildRequires: cmake(KF5KHtml)
 BuildRequires: cmake(KF5Solid)
 BuildRequires: cmake(KF5NotifyConfig)
+BuildRequires: cmake(KF5IdleTime)
 BuildRequires: ninja
 # for kf5_org.freedesktop.ScreenSaver.xml
 BuildRequires: plasma-workspace
