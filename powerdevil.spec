@@ -3,7 +3,7 @@
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
 Name: powerdevil
-Version: 5.2.1
+Version: 5.2.2
 Release: 1
 Source0: ftp://ftp.kde.org/pub/kde/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -31,7 +31,7 @@ BuildRequires: ninja
 BuildRequires: plasma-workspace
 
 %description
-KDE 5 Power Saving Tools
+KDE 5 Power Saving Tools.
 
 %libpackage powerdevilconfigcommonprivate 5
 %libpackage powerdevilcore 2
