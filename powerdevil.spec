@@ -29,6 +29,7 @@ BuildRequires: pkgconfig(xrandr)
 BuildRequires: ninja
 # for kf5_org.freedesktop.ScreenSaver.xml
 BuildRequires: plasma-workspace
+Conflicts: plasma-krunner-powerdevil
 
 %description
 KDE 5 Power Saving Tools.
