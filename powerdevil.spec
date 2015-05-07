@@ -5,7 +5,7 @@
 Name: powerdevil
 Version: 5.3.0
 Release: 1
-Source0: ftp://ftp.kde.org/pub/kde/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
+Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: KDE 5 Power Saving Tools
 URL: http://kde.org/
@@ -25,8 +25,8 @@ BuildRequires: cmake(KF5Solid)
 BuildRequires: cmake(KF5NotifyConfig)
 BuildRequires: cmake(KF5IdleTime)
 BuildRequires: cmake(ScreenSaverDBusInterface)
+BuildRequires: cmake(KF5Screen)
 BuildRequires: pkgconfig(xrandr)
-BuildRequires: ninja
 # for kf5_org.freedesktop.ScreenSaver.xml
 BuildRequires: plasma-workspace
 Conflicts: plasma-krunner-powerdevil
@@ -42,14 +42,14 @@ KDE 5 Power Saving Tools.
 %setup -qn %{name}-%{plasmaver}
 %apply_patches
 
-%cmake -G Ninja \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
+%cmake_kde5
 
 %build
-ninja -C build
+%ninja -C build
 
 %install
-DESTDIR="%{buildroot}" ninja -C build install %{?_smp_mflags}
+%ninja_install -C build
+
 %find_lang libpowerdevilcommonconfig
 %find_lang powerdevil
 %find_lang powerdevilactivitiesconfig
