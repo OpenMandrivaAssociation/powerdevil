@@ -4,7 +4,7 @@
 
 Name: powerdevil
 Version: 5.3.0
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: KDE 5 Power Saving Tools
@@ -49,6 +49,11 @@ KDE 5 Power Saving Tools.
 
 %install
 %ninja_install -C build
+
+# We don't have headers
+rm -f %{buildroot}%{_libdir}/libpowerdevilconfigcommonprivate.so
+rm -f %{buildroot}%{_libdir}/libpowerdevilcore.so
+rm -f %{buildroot}%{_libdir}/libpowerdevilui.so
 
 %find_lang libpowerdevilcommonconfig
 %find_lang powerdevil
