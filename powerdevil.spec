@@ -4,7 +4,7 @@
 
 Name: powerdevil
 Version: 5.3.0
-Release: 2
+Release: 3
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: KDE 5 Power Saving Tools
@@ -29,7 +29,7 @@ BuildRequires: cmake(KF5Screen)
 BuildRequires: pkgconfig(xrandr)
 # for kf5_org.freedesktop.ScreenSaver.xml
 BuildRequires: plasma-workspace
-Conflicts: plasma-krunner-powerdevil
+%rename: plasma-krunner-powerdevil
 
 %description
 KDE 5 Power Saving Tools.
