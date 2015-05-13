@@ -29,7 +29,7 @@ BuildRequires: cmake(KF5Screen)
 BuildRequires: pkgconfig(xrandr)
 # for kf5_org.freedesktop.ScreenSaver.xml
 BuildRequires: plasma-workspace
-%rename: plasma-krunner-powerdevil
+%rename plasma-krunner-powerdevil
 
 %description
 KDE 5 Power Saving Tools.
