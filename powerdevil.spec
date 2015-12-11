@@ -68,11 +68,10 @@ cat *.lang >all.lang
 %{_sysconfdir}/dbus-1/system.d/org.kde.powerdevil.backlighthelper.conf
 %{_libdir}/libexec/kauth/backlighthelper
 %{_libdir}/qt5/plugins/kcm_powerdevil*.so
-%{_libdir}/qt5/plugins/kded_powerdevil.so
 %{_libdir}/qt5/plugins/powerdevil*.so
+%{_libdir}/qt5/plugins/kf5/kded/powerdevil.so
 %{_datadir}/dbus-1/system-services/org.kde.powerdevil.*
 %{_datadir}/knotifications5/powerdevil.notifyrc
-%{_datadir}/kservices5/kded/powerdevil.desktop
 %{_datadir}/kservices5/powerdevil*.desktop
 %{_datadir}/kservicetypes5/powerdevilaction.desktop
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.backlighthelper.policy
