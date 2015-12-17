@@ -12,6 +12,7 @@ URL: http://kde.org/
 License: GPL
 Group: System/Libraries
 BuildRequires: cmake(ECM)
+BuildRequires: cmake(KF5Activities)
 BuildRequires: cmake(KF5DNSSD)
 BuildRequires: cmake(KF5KDELibs4Support)
 BuildRequires: cmake(KF5DocTools)
