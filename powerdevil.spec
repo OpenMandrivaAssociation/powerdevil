@@ -28,9 +28,8 @@ BuildRequires: cmake(KF5IdleTime)
 BuildRequires: cmake(ScreenSaverDBusInterface)
 BuildRequires: cmake(KF5Screen)
 BuildRequires: cmake(KF5Wayland)
+BuildRequires: cmake(LibKWorkspace)
 BuildRequires: pkgconfig(xrandr)
-# for kf5_org.freedesktop.ScreenSaver.xml
-BuildRequires: plasma-workspace
 Requires: upower
 %rename plasma-krunner-powerdevil
 
