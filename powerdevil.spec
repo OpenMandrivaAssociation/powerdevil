@@ -4,7 +4,7 @@
 
 Name: powerdevil
 Version: 5.5.2
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: KDE 5 Power Saving Tools
