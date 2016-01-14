@@ -4,13 +4,14 @@
 
 Name: powerdevil
 Version: 5.5.3
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: KDE 5 Power Saving Tools
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
+Patch0: powerdevil-enable-upower.patch
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(KF5Activities)
 BuildRequires: cmake(KF5DNSSD)
