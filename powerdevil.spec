@@ -4,7 +4,7 @@
 
 Name: powerdevil
 Version: 5.6.0
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: KDE 5 Power Saving Tools
@@ -27,7 +27,7 @@ BuildRequires: cmake(KF5Solid)
 BuildRequires: cmake(KF5NotifyConfig)
 BuildRequires: cmake(KF5IdleTime)
 BuildRequires: cmake(ScreenSaverDBusInterface)
-BuildRequires: cmake(KF5Screen)
+BuildRequires: cmake(KF5Screen) >= 5.6.0-2
 BuildRequires: cmake(KF5Wayland)
 BuildRequires: cmake(LibKWorkspace)
 BuildRequires: pkgconfig(xrandr)
