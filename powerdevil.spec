@@ -3,7 +3,7 @@
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
 Name: powerdevil
-Version: 5.6.5
+Version: 5.7.0
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -58,11 +58,11 @@ rm -f %{buildroot}%{_libdir}/libpowerdevilconfigcommonprivate.so
 rm -f %{buildroot}%{_libdir}/libpowerdevilcore.so
 rm -f %{buildroot}%{_libdir}/libpowerdevilui.so
 
-%find_lang libpowerdevilcommonconfig
-%find_lang powerdevil
-%find_lang powerdevilactivitiesconfig
-%find_lang powerdevilglobalconfig
-%find_lang powerdevilprofilesconfig
+%find_lang libpowerdevilcommonconfig || touch libpowerdevilcommonconfig.lang
+%find_lang powerdevil || touch powerdevil.lang
+%find_lang powerdevilactivitiesconfig || touch powerdevilactivitiesconfig.lang
+%find_lang powerdevilglobalconfig || touch powerdevilglobalconfig.lang
+%find_lang powerdevilprofilesconfig || touch powerdevilprofilesconfig.lang
 cat *.lang >all.lang
 
 %files -f all.lang
