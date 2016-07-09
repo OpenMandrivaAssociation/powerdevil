@@ -31,6 +31,7 @@ BuildRequires: cmake(KF5Screen) >= 5.6.0-2
 BuildRequires: cmake(KF5Wayland)
 BuildRequires: cmake(LibKWorkspace)
 BuildRequires: cmake(KF5BluezQt)
+BuildRequires: cmake(KF5NetworkManagerQt)
 BuildRequires: pkgconfig(xrandr)
 Requires: upower
 %rename plasma-krunner-powerdevil
