@@ -1,0 +1,45 @@
+diff -urN powerdevil-5.5.2/daemon/powerdevilprofilegenerator.cpp powerdevil-5.5.2-patched/daemon/powerdevilprofilegenerator.cpp
+--- powerdevil-5.5.2/daemon/powerdevilprofilegenerator.cpp	2015-12-22 20:49:29.000000000 +1000
++++ powerdevil-5.5.2-patched/daemon/powerdevilprofilegenerator.cpp	2016-01-03 21:16:23.939683028 +1000
+@@ -60,12 +60,12 @@
+     // We want to dim the screen after a while, definitely
+     {
+         KConfigGroup dimDisplay(&acProfile, "DimDisplay");
+-        dimDisplay.writeEntry< int >("idleTime", 300000);
++        dimDisplay.writeEntry< int >("idleTime", 3600000);
+     }
+     // Show the dialog when power button is pressed and suspend on suspend button pressed and lid closed (if supported)
+     {
+         KConfigGroup handleButtonEvents(&acProfile, "HandleButtonEvents");
+-        handleButtonEvents.writeEntry< uint >("powerButtonAction", LogoutDialogMode);
++        handleButtonEvents.writeEntry< uint >("powerButtonAction", ToRamMode);
+         if (toRam) {
+             handleButtonEvents.writeEntry< uint >("lidAction", ToRamMode);
+         } else {
+@@ -76,7 +76,7 @@
+     // And we also want to turn off the screen after another while
+     {
+         KConfigGroup dpmsControl(&acProfile, "DPMSControl");
+-        dpmsControl.writeEntry< uint >("idleTime", 600);
++        dpmsControl.writeEntry< uint >("idleTime", 5400);
+     }
+ 
+     // Powersave
+@@ -90,7 +90,7 @@
+     // Show the dialog when power button is pressed and suspend on suspend button pressed and lid closed (if supported)
+     {
+         KConfigGroup handleButtonEvents(&batteryProfile, "HandleButtonEvents");
+-        handleButtonEvents.writeEntry< uint >("powerButtonAction", LogoutDialogMode);
++        handleButtonEvents.writeEntry< uint >("powerButtonAction", ToRamMode);
+         if (toRam) {
+             handleButtonEvents.writeEntry< uint >("lidAction", ToRamMode);
+         } else {
+@@ -126,7 +126,7 @@
+     // Show the dialog when power button is pressed and suspend on suspend button pressed and lid closed (if supported)
+     {
+         KConfigGroup handleButtonEvents(&lowBatteryProfile, "HandleButtonEvents");
+-        handleButtonEvents.writeEntry< uint >("powerButtonAction", LogoutDialogMode);
++        handleButtonEvents.writeEntry< uint >("powerButtonAction", ToRamMode);
+         if (toRam) {
+             handleButtonEvents.writeEntry< uint >("lidAction", ToRamMode);
+         } else {

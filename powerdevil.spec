@@ -11,7 +11,7 @@ Summary: KDE 5 Power Saving Tools
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
-Patch0: powerdevil-enable-upower.patch
+Patch1: powerdevil-5.5.2-power-settings.patch
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(KF5Activities)
 BuildRequires: cmake(KF5DNSSD)
