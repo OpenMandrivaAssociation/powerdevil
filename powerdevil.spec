@@ -68,10 +68,11 @@ rm -f %{buildroot}%{_libdir}/libpowerdevilui.so
 cat *.lang >all.lang
 
 %files -f all.lang
-%{_sysconfdir}/dbus-1/system.d/org.kde.powerdevil.backlighthelper.conf
+%{_sysconfdir}/dbus-1/system.d/*.conf
 %{_sysconfdir}/xdg/autostart/powerdevil.desktop
 %{_libdir}/libexec/org_kde_powerdevil
 %{_libdir}/libexec/kauth/backlighthelper
+%{_libdir}/libexec/kauth/discretegpuhelper
 %{_libdir}/qt5/plugins/kcm_powerdevil*.so
 %{_libdir}/qt5/plugins/powerdevil*.so
 %{_libdir}/qt5/plugins/kf5/powerdevil/powerdevilupowerbackend.so
@@ -79,5 +80,5 @@ cat *.lang >all.lang
 %{_datadir}/knotifications5/powerdevil.notifyrc
 %{_datadir}/kservices5/powerdevil*.desktop
 %{_datadir}/kservicetypes5/powerdevilaction.desktop
-%{_datadir}/polkit-1/actions/org.kde.powerdevil.backlighthelper.policy
+%{_datadir}/polkit-1/actions/*.policy
 %doc %{_docdir}/HTML/en/kcontrol
