@@ -3,7 +3,7 @@
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
 Name: powerdevil
-Version: 5.11.5
+Version: 5.12.0
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -76,3 +76,4 @@ rm -f %{buildroot}%{_libdir}/libpowerdevilui.so
 %{_datadir}/kservices5/powerdevil*.desktop
 %{_datadir}/kservicetypes5/powerdevilaction.desktop
 %{_datadir}/polkit-1/actions/*.policy
+%{_datadir}/kconf_update/powerdevil_move_shortcuts.upd
