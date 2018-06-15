@@ -34,6 +34,7 @@ BuildRequires: cmake(LibKWorkspace)
 BuildRequires: cmake(KF5BluezQt)
 BuildRequires: cmake(KF5NetworkManagerQt)
 BuildRequires: pkgconfig(xrandr)
+BuildRequires: pkgconfig(libudev)
 Requires: upower
 %rename plasma-krunner-powerdevil
 
