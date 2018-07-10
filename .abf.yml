@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   powerdevil-5.12.3.tar.xz: a5fd2cae42cc046b5f8264fe9826f2ca5f9cf1ed
+sources:
+  powerdevil-5.12.6.tar.xz: 8862ae7ab7e26ec9f7a91c8bdf65caddebcf0daf
