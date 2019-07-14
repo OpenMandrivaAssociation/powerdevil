@@ -3,7 +3,7 @@
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
 Name: powerdevil
-Version: 5.15.5
+Version: 5.16.3
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -65,7 +65,7 @@ rm -f %{buildroot}%{_libdir}/libpowerdevilui.so
 %find_lang %{name} --all-name --with-html --with-man
 
 %files -f %{name}.lang
-%{_sysconfdir}/dbus-1/system.d/*.conf
+%{_datadir}/dbus-1/system.d/*.conf
 %{_sysconfdir}/xdg/autostart/powerdevil.desktop
 %{_libdir}/libexec/org_kde_powerdevil
 %{_libdir}/libexec/kauth/backlighthelper
