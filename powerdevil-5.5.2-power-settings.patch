@@ -1,22 +1,23 @@
-diff -up powerdevil-5.18.0/daemon/powerdevilprofilegenerator.cpp.1~ powerdevil-5.18.0/daemon/powerdevilprofilegenerator.cpp
---- powerdevil-5.18.0/daemon/powerdevilprofilegenerator.cpp.1~	2020-02-06 14:31:58.000000000 +0100
-+++ powerdevil-5.18.0/daemon/powerdevilprofilegenerator.cpp	2020-02-09 04:02:52.233062001 +0100
-@@ -59,12 +59,12 @@ void ProfileGenerator::generateProfiles(
-     acProfile.writeEntry("icon", "battery-charging");
- 
-     const bool mobile = !qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_MOBILE");
--    const Modes defaultPowerButtonAction = mobile ? LockScreenMode : LogoutDialogMode;
-+    const Modes defaultPowerButtonAction = mobile ? LockScreenMode : ToRamMode;
- 
+diff -up powerdevil-5.18.90/daemon/powerdevilprofilegenerator.cpp.1~ powerdevil-5.18.90/daemon/powerdevilprofilegenerator.cpp
+--- powerdevil-5.18.90/daemon/powerdevilprofilegenerator.cpp.1~	2020-05-14 12:56:45.000000000 +0200
++++ powerdevil-5.18.90/daemon/powerdevilprofilegenerator.cpp	2020-05-16 00:11:31.916603161 +0200
+@@ -61,13 +61,13 @@ void ProfileGenerator::generateProfiles(
      // We want to dim the screen after a while, definitely
      {
          KConfigGroup dimDisplay(&acProfile, "DimDisplay");
 -        dimDisplay.writeEntry< int >("idleTime", 300000);
 +        dimDisplay.writeEntry< int >("idleTime", 3600000);
      }
-     // Show the dialog when power button is pressed and suspend on suspend button pressed and lid closed (if supported)
+ 
+     auto initLid = [toRam](KConfigGroup &profile)
      {
-@@ -82,7 +82,7 @@ void ProfileGenerator::generateProfiles(
+         const bool mobile = !qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_MOBILE");
+-        const Modes defaultPowerButtonAction = mobile ? ToRamMode : LogoutDialogMode;
++        const Modes defaultPowerButtonAction = mobile ? ToRamMode : ToRamMode;
+ 
+         KConfigGroup handleButtonEvents(&profile, "HandleButtonEvents");
+         handleButtonEvents.writeEntry< uint >("powerButtonAction", defaultPowerButtonAction);
+@@ -85,7 +85,7 @@ void ProfileGenerator::generateProfiles(
      // And we also want to turn off the screen after another while
      {
          KConfigGroup dpmsControl(&acProfile, "DPMSControl");
