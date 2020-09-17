@@ -1,7 +1,7 @@
-diff -up powerdevil-5.18.90/daemon/powerdevilprofilegenerator.cpp.1~ powerdevil-5.18.90/daemon/powerdevilprofilegenerator.cpp
---- powerdevil-5.18.90/daemon/powerdevilprofilegenerator.cpp.1~	2020-05-14 12:56:45.000000000 +0200
-+++ powerdevil-5.18.90/daemon/powerdevilprofilegenerator.cpp	2020-05-16 00:11:31.916603161 +0200
-@@ -61,13 +61,13 @@ void ProfileGenerator::generateProfiles(
+diff -up powerdevil-5.19.90/daemon/powerdevilprofilegenerator.cpp.1~ powerdevil-5.19.90/daemon/powerdevilprofilegenerator.cpp
+--- powerdevil-5.19.90/daemon/powerdevilprofilegenerator.cpp.1~	2020-09-17 20:05:01.303990953 +0200
++++ powerdevil-5.19.90/daemon/powerdevilprofilegenerator.cpp	2020-09-17 20:08:53.131487621 +0200
+@@ -63,7 +63,7 @@ void ProfileGenerator::generateProfiles(
      // We want to dim the screen after a while, definitely
      {
          KConfigGroup dimDisplay(&acProfile, "DimDisplay");
@@ -9,20 +9,15 @@ diff -up powerdevil-5.18.90/daemon/powerdevilprofilegenerator.cpp.1~ powerdevil-
 +        dimDisplay.writeEntry< int >("idleTime", 3600000);
      }
  
-     auto initLid = [toRam](KConfigGroup &profile)
-     {
-         const bool mobile = !qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_MOBILE");
--        const Modes defaultPowerButtonAction = mobile ? ToRamMode : LogoutDialogMode;
-+        const Modes defaultPowerButtonAction = mobile ? ToRamMode : ToRamMode;
+     auto initLid = [toRam, mobile](KConfigGroup &profile)
+@@ -108,8 +108,8 @@ void ProfileGenerator::generateProfiles(
  
-         KConfigGroup handleButtonEvents(&profile, "HandleButtonEvents");
-         handleButtonEvents.writeEntry< uint >("powerButtonAction", defaultPowerButtonAction);
-@@ -85,7 +85,7 @@ void ProfileGenerator::generateProfiles(
-     // And we also want to turn off the screen after another while
+     // We want to turn off the screen after another while
      {
-         KConfigGroup dpmsControl(&acProfile, "DPMSControl");
--        dpmsControl.writeEntry< uint >("idleTime", 600);
-+        dpmsControl.writeEntry< uint >("idleTime", 5400);
-     }
- 
-     // Powersave
+-        // on mobile, 1 minute, on laptop 5 minutes
+-        auto timeout = mobile ? 60 : 300;
++        // on mobile, 1 minute, on laptop 90 minutes
++        auto timeout = mobile ? 60 : 5400;
+         KConfigGroup dpmsControl(&batteryProfile, "DPMSControl");
+         dpmsControl.writeEntry< uint >("idleTime", timeout);
+         dpmsControl.writeEntry< uint >("lockBeforeTurnOff", mobile);
