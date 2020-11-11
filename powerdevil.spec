@@ -3,7 +3,7 @@
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
 Name: powerdevil
-Version: 5.20.2
+Version: 5.20.3
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
@@ -75,6 +75,5 @@ rm -f %{buildroot}%{_libdir}/libpowerdevilui.so
 %{_datadir}/knotifications5/powerdevil.notifyrc
 %{_datadir}/kservices5/powerdevil*.desktop
 %{_datadir}/kservicetypes5/powerdevilaction.desktop
-%{_datadir}/polkit-1/actions/*.policy
 %{_libdir}/libexec/kauth/chargethresholdhelper
 %{_datadir}/qlogging-categories5/powerdevil.categories
