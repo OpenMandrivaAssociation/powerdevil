@@ -4,7 +4,7 @@
 
 Name: powerdevil
 Version: 5.20.3
-Release: 6
+Release: 7
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: KDE 5 Power Saving Tools
@@ -77,3 +77,6 @@ rm -f %{buildroot}%{_libdir}/libpowerdevilui.so
 %{_datadir}/kservicetypes5/powerdevilaction.desktop
 %{_libdir}/libexec/kauth/chargethresholdhelper
 %{_datadir}/qlogging-categories5/powerdevil.categories
+%{_datadir}/polkit-1/actions/org.kde.powerdevil.backlighthelper.policy
+%{_datadir}/polkit-1/actions/org.kde.powerdevil.chargethresholdhelper.policy
+%{_datadir}/polkit-1/actions/org.kde.powerdevil.discretegpuhelper.policy
