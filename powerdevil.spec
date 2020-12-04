@@ -4,7 +4,7 @@
 
 Name: powerdevil
 Version: 5.20.4
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: KDE 5 Power Saving Tools
@@ -35,6 +35,7 @@ BuildRequires: cmake(KF5BluezQt)
 BuildRequires: cmake(KF5NetworkManagerQt)
 BuildRequires: pkgconfig(xrandr)
 BuildRequires: pkgconfig(libudev)
+BuildRequires: pkgconfig(libcap)
 Requires: upower
 %rename plasma-krunner-powerdevil
 
