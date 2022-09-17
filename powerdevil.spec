@@ -3,8 +3,8 @@
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
 Name: powerdevil
-Version: 5.25.5
-Release: 2
+Version: 5.25.90
+Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: KDE 5 Power Saving Tools
@@ -70,13 +70,10 @@ rm -f %{buildroot}%{_libdir}/libpowerdevilui.so
 %{_libdir}/libexec/org_kde_powerdevil
 %{_libdir}/libexec/kauth/backlighthelper
 %{_libdir}/libexec/kauth/discretegpuhelper
-%{_libdir}/qt5/plugins/kcm_powerdevil*.so
 %{_libdir}/qt5/plugins/powerdevil*.so
 %{_libdir}/qt5/plugins/kf5/powerdevil/powerdevilupowerbackend.so
 %{_datadir}/dbus-1/system-services/org.kde.powerdevil.*
 %{_datadir}/knotifications5/powerdevil.notifyrc
-%{_datadir}/kservices5/powerdevil*.desktop
-%{_datadir}/kservicetypes5/powerdevilaction.desktop
 %{_libdir}/libexec/kauth/chargethresholdhelper
 %{_datadir}/qlogging-categories5/powerdevil.categories
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.backlighthelper.policy
@@ -84,3 +81,6 @@ rm -f %{buildroot}%{_libdir}/libpowerdevilui.so
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.discretegpuhelper.policy
 %{_prefix}/lib/systemd/user/plasma-powerdevil.service
 %{_libdir}/libpowerdevilcore.so.*
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings_qwidgets/kcm_powerdevil*.so
+%{_libdir}/qt5/plugins/powerdevil
+%{_datadir}/applications/kcm_powerdevil*.desktop
