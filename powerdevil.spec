@@ -1,10 +1,10 @@
 %define major 5
-%define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
+%define stable %([ "%(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 
 Name: powerdevil
 Version: 5.27.3
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Source1000: %{name}.rpmlintrc
 Summary: KDE 5 Power Saving Tools
@@ -38,7 +38,11 @@ BuildRequires: cmake(KF5KCMUtils)
 BuildRequires: pkgconfig(xrandr)
 BuildRequires: pkgconfig(libudev)
 BuildRequires: pkgconfig(libcap)
-Requires: upower
+Requires(meta): power-profiles-daemon
+Recommends: kinfocenter
+Recommends: networkmanager-qt
+Recommends: bluez-qt
+
 %rename plasma-krunner-powerdevil
 
 %description
@@ -68,7 +72,7 @@ rm -f %{buildroot}%{_libdir}/libpowerdevilui.so
 %files -f %{name}.lang
 %{_datadir}/dbus-1/system.d/*.conf
 %{_sysconfdir}/xdg/autostart/powerdevil.desktop
-%{_libdir}/libexec/org_kde_powerdevil
+%caps(cap_wake_alarm+ep) %{_libdir}/libexec/org_kde_powerdevil
 %{_libdir}/libexec/kauth/backlighthelper
 %{_libdir}/libexec/kauth/discretegpuhelper
 %{_libdir}/qt5/plugins/powerdevil*.so
