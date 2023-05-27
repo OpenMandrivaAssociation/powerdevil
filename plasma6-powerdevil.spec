@@ -39,6 +39,8 @@ BuildRequires: cmake(LibKWorkspace) >= 5.27.80
 BuildRequires: cmake(KF6BluezQt)
 BuildRequires: cmake(KF6NetworkManagerQt)
 BuildRequires: cmake(KF6KCMUtils)
+BuildRequires: cmake(KF6Auth)
+BuildRequires: cmake(KF6Notifications)
 BuildRequires: pkgconfig(xrandr)
 BuildRequires: pkgconfig(libudev)
 BuildRequires: pkgconfig(libcap)
