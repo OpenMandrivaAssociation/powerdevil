@@ -16,6 +16,7 @@ URL: http://kde.org/
 License: GPL
 Group: System/Libraries
 Patch1: powerdevil-5.5.2-power-settings.patch
+Patch2: powerdevil-bump-sonames.patch
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(Qt6)
 BuildRequires: cmake(Qt6Core)
@@ -54,9 +55,9 @@ Recommends: bluez-qt
 %description
 KDE 5 Power Saving Tools.
 
-%libpackage powerdevilconfigcommonprivate 5
-%libpackage powerdevilcore 2
-%libpackage powerdevilui 5
+%libpackage powerdevilconfigcommonprivate 6
+%libpackage powerdevilcore 3
+%libpackage powerdevilui 6
 
 %prep
 %autosetup -p1 -n powerdevil-%{?git:master}%{!?git:%{version}}
