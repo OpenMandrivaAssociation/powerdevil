@@ -46,18 +46,12 @@ BuildRequires: pkgconfig(xrandr)
 BuildRequires: pkgconfig(libudev)
 BuildRequires: pkgconfig(libcap)
 Requires(meta): power-profiles-daemon
-Recommends: kinfocenter
-Recommends: networkmanager-qt
-Recommends: bluez-qt
-
-%rename plasma-krunner-powerdevil
+Recommends: plasma6-kinfocenter
+Recommends: kf6-networkmanager-qt
+Recommends: kf6-bluez-qt
 
 %description
-KDE 5 Power Saving Tools.
-
-%libpackage powerdevilconfigcommonprivate 6
-%libpackage powerdevilcore 3
-%libpackage powerdevilui 6
+KDE 6 Power Saving Tools.
 
 %prep
 %autosetup -p1 -n powerdevil-%{?git:master}%{!?git:%{version}}
@@ -72,11 +66,6 @@ KDE 5 Power Saving Tools.
 
 %install
 %ninja_install -C build
-
-# We don't have headers
-rm -f %{buildroot}%{_libdir}/libpowerdevilconfigcommonprivate.so
-rm -f %{buildroot}%{_libdir}/libpowerdevilcore.so
-rm -f %{buildroot}%{_libdir}/libpowerdevilui.so
 
 %find_lang %{name} --all-name --with-html --with-man
 
@@ -96,7 +85,9 @@ rm -f %{buildroot}%{_libdir}/libpowerdevilui.so
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.chargethresholdhelper.policy
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.discretegpuhelper.policy
 %{_prefix}/lib/systemd/user/plasma-powerdevil.service
-%{_libdir}/libpowerdevilcore.so.*
 %{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_powerdevil*.so
 %{_qtdir}/plugins/powerdevil
 %{_datadir}/applications/kcm_powerdevil*.desktop
+%{_libdir}/libpowerdevilconfigcommonprivate.so*
+%{_libdir}/libpowerdevilcore.so*
+%{_libdir}/libpowerdevilui.so*
