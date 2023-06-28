@@ -31,7 +31,7 @@ BuildRequires: cmake(KScreenLocker) < 5.27.50
 BuildRequires: cmake(KF5Screen) >= 5.6.0-2
 BuildRequires: cmake(KF5Wayland)
 BuildRequires: cmake(KF5Kirigami2)
-BuildRequires: cmake(LibKWorkspace)
+BuildRequires: cmake(LibKWorkspace) < 5.27.50
 BuildRequires: cmake(KF5BluezQt)
 BuildRequires: cmake(KF5NetworkManagerQt)
 BuildRequires: cmake(KF5KCMUtils)
