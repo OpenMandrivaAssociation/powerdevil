@@ -27,7 +27,7 @@ BuildRequires: cmake(KF5KHtml)
 BuildRequires: cmake(KF5Solid)
 BuildRequires: cmake(KF5NotifyConfig)
 BuildRequires: cmake(KF5IdleTime)
-BuildRequires: cmake(ScreenSaverDBusInterface)
+BuildRequires: cmake(KScreenLocker) < 5.27.50
 BuildRequires: cmake(KF5Screen) >= 5.6.0-2
 BuildRequires: cmake(KF5Wayland)
 BuildRequires: cmake(KF5Kirigami2)
