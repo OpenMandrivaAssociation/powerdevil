@@ -1,16 +1,16 @@
-diff -up powerdevil-5.19.90/daemon/powerdevilprofilegenerator.cpp.1~ powerdevil-5.19.90/daemon/powerdevilprofilegenerator.cpp
---- powerdevil-5.19.90/daemon/powerdevilprofilegenerator.cpp.1~	2020-09-17 20:05:01.303990953 +0200
-+++ powerdevil-5.19.90/daemon/powerdevilprofilegenerator.cpp	2020-09-17 20:08:53.131487621 +0200
-@@ -63,7 +63,7 @@ void ProfileGenerator::generateProfiles(
+diff -up powerdevil-master/daemon/powerdevilprofilegenerator.cpp.1~ powerdevil-master/daemon/powerdevilprofilegenerator.cpp
+--- powerdevil-master/daemon/powerdevilprofilegenerator.cpp.1~	2023-07-07 21:01:06.109778490 +0200
++++ powerdevil-master/daemon/powerdevilprofilegenerator.cpp	2023-07-07 21:01:42.669084471 +0200
+@@ -60,7 +60,7 @@ void ProfileGenerator::generateProfiles(
      // We want to dim the screen after a while, definitely
      {
          KConfigGroup dimDisplay(&acProfile, "DimDisplay");
--        dimDisplay.writeEntry< int >("idleTime", 300000);
-+        dimDisplay.writeEntry< int >("idleTime", 3600000);
+-        dimDisplay.writeEntry<int>("idleTime", 300000);
++        dimDisplay.writeEntry<int>("idleTime", 3600000);
      }
  
-     auto initLid = [toRam, mobile](KConfigGroup &profile)
-@@ -108,8 +108,8 @@ void ProfileGenerator::generateProfiles(
+     auto initLid = [toRam, mobile](KConfigGroup &profile) {
+@@ -113,8 +113,8 @@ void ProfileGenerator::generateProfiles(
  
      // We want to turn off the screen after another while
      {
@@ -19,5 +19,5 @@ diff -up powerdevil-5.19.90/daemon/powerdevilprofilegenerator.cpp.1~ powerdevil-
 +        // on mobile, 1 minute, on laptop 90 minutes
 +        auto timeout = mobile ? 60 : 5400;
          KConfigGroup dpmsControl(&batteryProfile, "DPMSControl");
-         dpmsControl.writeEntry< uint >("idleTime", timeout);
-         dpmsControl.writeEntry< uint >("lockBeforeTurnOff", mobile);
+         dpmsControl.writeEntry<uint>("idleTime", timeout);
+         dpmsControl.writeEntry<uint>("lockBeforeTurnOff", mobile);

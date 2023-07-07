@@ -1,7 +1,7 @@
 %define major 5
 %define stable %([ "%(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
-%define git 20230610
+%define git 20230707
 
 Name: plasma6-powerdevil
 Version: 5.240.0
@@ -75,7 +75,6 @@ KDE 6 Power Saving Tools.
 %caps(cap_wake_alarm+ep) %{_libdir}/libexec/org_kde_powerdevil
 %{_libdir}/libexec/kauth/backlighthelper
 %{_libdir}/libexec/kauth/discretegpuhelper
-%{_qtdir}/plugins/powerdevil*.so
 %{_qtdir}/plugins/kf6/powerdevil/powerdevilupowerbackend.so
 %{_datadir}/dbus-1/system-services/org.kde.powerdevil.*
 %{_datadir}/knotifications6/powerdevil.notifyrc
