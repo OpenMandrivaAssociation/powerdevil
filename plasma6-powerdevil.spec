@@ -1,7 +1,7 @@
 %define major 5
 %define stable %([ "%(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
-%define git 20230707
+%define git 20230715
 
 Name: plasma6-powerdevil
 Version: 5.240.0
@@ -90,3 +90,6 @@ KDE 6 Power Saving Tools.
 %{_libdir}/libpowerdevilconfigcommonprivate.so*
 %{_libdir}/libpowerdevilcore.so*
 %{_libdir}/libpowerdevilui.so*
+%{_prefix}/lib/systemd/user/plasma-powerprofile-osd.service
+%{_libdir}/libexec/power_profile_osd_service
+%{_datadir}/dbus-1/services/org.kde.powerdevil.powerProfileOsdService.service
