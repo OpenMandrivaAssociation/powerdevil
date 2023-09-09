@@ -1,6 +1,6 @@
-diff -up powerdevil-master/CMakeLists.txt.omv~ powerdevil-master/CMakeLists.txt
---- powerdevil-master/CMakeLists.txt.omv~	2023-05-27 18:43:07.563798876 +0200
-+++ powerdevil-master/CMakeLists.txt	2023-05-27 18:43:13.672854596 +0200
+diff -up powerdevil-master/CMakeLists.txt.1~ powerdevil-master/CMakeLists.txt
+--- powerdevil-master/CMakeLists.txt.1~	2023-09-09 04:15:48.000000000 +0200
++++ powerdevil-master/CMakeLists.txt	2023-09-09 16:41:28.503893170 +0200
 @@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
  
  project(PowerDevil)
@@ -10,11 +10,11 @@ diff -up powerdevil-master/CMakeLists.txt.omv~ powerdevil-master/CMakeLists.txt
  
  set(QT_MIN_VERSION "6.4.0")
  set(KF6_MIN_VERSION "5.240.0")
-diff -up powerdevil-master/daemon/CMakeLists.txt.omv~ powerdevil-master/daemon/CMakeLists.txt
---- powerdevil-master/daemon/CMakeLists.txt.omv~	2023-05-27 18:43:18.127895253 +0200
-+++ powerdevil-master/daemon/CMakeLists.txt	2023-05-27 18:43:24.277951411 +0200
-@@ -39,7 +39,7 @@ kconfig_add_kcfg_files(powerdevilcore_SR
- qt_add_dbus_interface(powerdevilcore_SRCS org.freedesktop.ScreenSaver.xml screenlocker_interface)
+diff -up powerdevil-master/daemon/CMakeLists.txt.1~ powerdevil-master/daemon/CMakeLists.txt
+--- powerdevil-master/daemon/CMakeLists.txt.1~	2023-09-09 16:41:28.503893170 +0200
++++ powerdevil-master/daemon/CMakeLists.txt	2023-09-09 16:42:48.657650357 +0200
+@@ -49,7 +49,7 @@ qt_add_dbus_interface(powerdevilcore_SRC
+ )
  
  add_library(powerdevilcore SHARED ${powerdevilcore_SRCS} powerdevil_debug.cpp)
 -set_target_properties(powerdevilcore PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION 2)
