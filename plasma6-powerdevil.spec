@@ -1,7 +1,7 @@
 %define major 5
 %define stable %([ "%(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
-%define git 20230919
+%define git 20230924
 
 Name: plasma6-powerdevil
 Version: 5.240.0
