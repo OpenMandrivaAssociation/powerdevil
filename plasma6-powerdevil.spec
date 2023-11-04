@@ -1,7 +1,7 @@
 %define major 5
 %define stable %([ "%(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
-%define git 20231023
+%define git 20231104
 
 Name: plasma6-powerdevil
 Version: 5.240.0
@@ -15,7 +15,6 @@ Summary: KDE 6 Power Saving Tools
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
-Patch2: powerdevil-bump-sonames.patch
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(Qt6)
 BuildRequires: cmake(Qt6Core)
@@ -86,6 +85,7 @@ KDE 6 Power Saving Tools.
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.discretegpuhelper.policy
 %{_prefix}/lib/systemd/user/plasma-powerdevil.service
 %{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_powerdevil*.so
+%{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_powerdevilprofilesconfig.so
 %{_qtdir}/plugins/powerdevil
 %{_datadir}/applications/kcm_powerdevil*.desktop
 %{_libdir}/libpowerdevilconfigcommonprivate.so*
