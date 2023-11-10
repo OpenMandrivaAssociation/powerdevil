@@ -1,15 +1,15 @@
 %define major 5
-%define stable %([ "%(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
+%define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 -o "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
-%define git 20231104
+#define git 20231104
 
 Name: plasma6-powerdevil
-Version: 5.240.0
+Version: 5.27.80
 Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0: https://invent.kde.org/plasma/powerdevil/-/archive/master/powerdevil-master.tar.bz2#/powerdevil-%{git}.tar.bz2
 %else
-Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
+Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/powerdevil-%{version}.tar.xz
 %endif
 Summary: KDE 6 Power Saving Tools
 URL: http://kde.org/
