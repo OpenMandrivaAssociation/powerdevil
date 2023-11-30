@@ -4,8 +4,8 @@
 #define git 20231104
 
 Name: plasma6-powerdevil
-Version: 5.27.80
-Release: %{?git:0.%{git}.}2
+Version: 5.90.0
+Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0: https://invent.kde.org/plasma/powerdevil/-/archive/master/powerdevil-master.tar.bz2#/powerdevil-%{git}.tar.bz2
 %else
@@ -18,7 +18,7 @@ Group: System/Libraries
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(Qt6)
 BuildRequires: cmake(Qt6Core)
-BuildRequires: cmake(KF6Activities)
+BuildRequires: cmake(PlasmaActivities)
 BuildRequires: cmake(KF6DNSSD)
 BuildRequires: cmake(KF6DocTools)
 BuildRequires: cmake(KF6CoreAddons)
@@ -32,7 +32,7 @@ BuildRequires: cmake(KF6NotifyConfig)
 BuildRequires: cmake(KF6IdleTime)
 BuildRequires: cmake(ScreenSaverDBusInterface) >= 5.27.80
 BuildRequires: cmake(KF6Screen)
-BuildRequires: cmake(KF6Wayland)
+BuildRequires: cmake(Wayland) >= 5.90.0
 BuildRequires: cmake(KF6Kirigami2)
 BuildRequires: cmake(LibKWorkspace) >= 5.27.80
 BuildRequires: cmake(KF6BluezQt)
@@ -90,7 +90,6 @@ KDE 6 Power Saving Tools.
 %{_datadir}/applications/kcm_powerdevil*.desktop
 %{_libdir}/libpowerdevilconfigcommonprivate.so*
 %{_libdir}/libpowerdevilcore.so*
-%{_libdir}/libpowerdevilui.so*
 %{_prefix}/lib/systemd/user/plasma-powerprofile-osd.service
 %{_libdir}/libexec/power_profile_osd_service
 %{_datadir}/dbus-1/services/org.kde.powerdevil.powerProfileOsdService.service
