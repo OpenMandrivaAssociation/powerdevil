@@ -44,7 +44,6 @@ BuildRequires: cmake(LayerShellQt)
 BuildRequires: pkgconfig(xrandr)
 BuildRequires: pkgconfig(libudev)
 BuildRequires: pkgconfig(libcap)
-BuildRequires: plasma6-xdg-desktop-portal-kde
 Requires(meta): power-profiles-daemon
 Recommends: plasma6-kinfocenter
 Recommends: kf6-networkmanager-qt
