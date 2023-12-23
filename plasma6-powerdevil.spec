@@ -4,7 +4,7 @@
 #define git 20231104
 
 Name: plasma6-powerdevil
-Version: 5.90.0
+Version: 5.91.0
 Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0: https://invent.kde.org/plasma/powerdevil/-/archive/master/powerdevil-master.tar.bz2#/powerdevil-%{git}.tar.bz2
@@ -83,7 +83,6 @@ KDE 6 Power Saving Tools.
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.chargethresholdhelper.policy
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.discretegpuhelper.policy
 %{_prefix}/lib/systemd/user/plasma-powerdevil.service
-%{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_powerdevil*.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_powerdevilprofilesconfig.so
 %{_qtdir}/plugins/powerdevil
 %{_datadir}/applications/kcm_powerdevil*.desktop
