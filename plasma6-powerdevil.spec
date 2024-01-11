@@ -4,7 +4,7 @@
 #define git 20231104
 
 Name: plasma6-powerdevil
-Version: 5.91.0
+Version: 5.92.0
 Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0: https://invent.kde.org/plasma/powerdevil/-/archive/master/powerdevil-master.tar.bz2#/powerdevil-%{git}.tar.bz2
