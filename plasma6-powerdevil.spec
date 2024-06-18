@@ -6,7 +6,7 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 Name: plasma6-powerdevil
-Version: 6.0.5
+Version: 6.1.0
 Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0: https://invent.kde.org/plasma/powerdevil/-/archive/%{gitbranch}/powerdevil-%{gitbranchd}.tar.bz2#/powerdevil-%{git}.tar.bz2
@@ -76,7 +76,6 @@ KDE 6 Power Saving Tools.
 %caps(cap_wake_alarm+ep) %{_libdir}/libexec/org_kde_powerdevil
 %{_libdir}/libexec/kf6/kauth/backlighthelper
 %{_libdir}/libexec/kf6/kauth/discretegpuhelper
-%{_qtdir}/plugins/kf6/powerdevil/powerdevilupowerbackend.so
 %{_datadir}/dbus-1/system-services/org.kde.powerdevil.*
 %{_datadir}/knotifications6/powerdevil.notifyrc
 %{_libdir}/libexec/kf6/kauth/chargethresholdhelper
