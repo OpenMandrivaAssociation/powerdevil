@@ -6,7 +6,7 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 Name: plasma6-powerdevil
-Version: 6.1.5
+Version: 6.2.0
 Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0: https://invent.kde.org/plasma/powerdevil/-/archive/%{gitbranch}/powerdevil-%{gitbranchd}.tar.bz2#/powerdevil-%{git}.tar.bz2
@@ -90,6 +90,11 @@ KDE 6 Power Saving Tools.
 %{_datadir}/applications/kcm_powerdevil*.desktop
 %{_libdir}/libpowerdevilconfigcommonprivate.so*
 %{_libdir}/libpowerdevilcore.so*
-%{_prefix}/lib/systemd/user/plasma-powerprofile-osd.service
-%{_libdir}/libexec/power_profile_osd_service
-%{_datadir}/dbus-1/services/org.kde.powerdevil.powerProfileOsdService.service
+%{_qtdir}/plugins/kf6/krunner/krunner_powerdevil.so
+%{_qtdir}/qml/org/kde/plasma/private/batterymonitor
+%{_qtdir}/qml/org/kde/plasma/private/brightnesscontrolplugin
+%{_datadir}/metainfo/org.kde.plasma.battery.appdata.xml
+%{_datadir}/metainfo/org.kde.plasma.brightness.appdata.xml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.battery
+%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness
+%{_datadir}/qlogging-categories6/batterymonitor.categories
