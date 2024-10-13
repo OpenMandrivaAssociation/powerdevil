@@ -20,6 +20,7 @@ Group: System/Libraries
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(Qt6)
 BuildRequires: cmake(Qt6Core)
+BuildRequires: cmake(QCoro6)
 BuildRequires: cmake(PlasmaActivities)
 BuildRequires: cmake(KF6DNSSD)
 BuildRequires: cmake(KF6DocTools)
