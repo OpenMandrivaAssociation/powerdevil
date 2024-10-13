@@ -37,6 +37,7 @@ BuildRequires: cmake(ScreenSaverDBusInterface) >= 5.27.80
 BuildRequires: cmake(KF6Screen)
 BuildRequires: cmake(Wayland) >= 5.90.0
 BuildRequires: cmake(KF6Kirigami2)
+BuildRequires: cmake(KF6Runner)
 BuildRequires: cmake(LibKWorkspace) >= 5.27.80
 BuildRequires: cmake(KF6BluezQt)
 BuildRequires: cmake(KF6NetworkManagerQt)
