@@ -14,7 +14,7 @@ Source0: https://invent.kde.org/plasma/powerdevil/-/archive/%{gitbranch}/powerde
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/powerdevil-%{version}.tar.xz
 %endif
 Summary: KDE 6 Power Saving Tools
-URL: http://kde.org/
+URL: https://kde.org/
 License: GPL
 Group: System/Libraries
 BuildRequires: cmake(ECM)
