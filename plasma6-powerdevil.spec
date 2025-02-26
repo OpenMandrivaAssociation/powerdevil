@@ -20,6 +20,7 @@ Group: System/Libraries
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(Qt6)
 BuildRequires: cmake(Qt6Core)
+BuildRequires: cmake(Qt6WaylandClient)
 BuildRequires: cmake(QCoro6)
 BuildRequires: cmake(PlasmaActivities)
 BuildRequires: cmake(KF6DNSSD)
@@ -52,6 +53,8 @@ BuildRequires: cmake(PlasmaWaylandProtocols)
 BuildRequires: pkgconfig(xrandr)
 BuildRequires: pkgconfig(libudev)
 BuildRequires: pkgconfig(libcap)
+BuildRequires: pkgconfig(xkbcommon)
+BuildRequires: pkgconfig(wayland-client)
 Requires(meta): power-profiles-daemon
 Recommends: plasma6-kinfocenter
 Recommends: kf6-networkmanager-qt
