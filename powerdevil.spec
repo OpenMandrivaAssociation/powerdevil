@@ -5,9 +5,9 @@
 %define gitbranch Plasma/6.0
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
-Name: plasma6-powerdevil
+Name: powerdevil
 Version: 6.3.4
-Release: %{?git:0.%{git}.}2
+Release: %{?git:0.%{git}.}3
 %if 0%{?git:1}
 Source0: https://invent.kde.org/plasma/powerdevil/-/archive/%{gitbranch}/powerdevil-%{gitbranchd}.tar.bz2#/powerdevil-%{git}.tar.bz2
 %else
@@ -59,25 +59,14 @@ Requires(meta): power-profiles-daemon
 Recommends: plasma6-kinfocenter
 Recommends: kf6-networkmanager-qt
 Recommends: kf6-bluez-qt
+# Renamed after 6.0 2025-05-03
+%rename plasma6-powerdevil
+BuildSystem: cmake
+BuildOption: -DBUILD_QCH:BOOL=ON
+BuildOption: -DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 
 %description
 KDE 6 Power Saving Tools.
-
-%prep
-%autosetup -p1 -n powerdevil-%{?git:%{gitbranchd}}%{!?git:%{version}}
-%cmake \
-	-DBUILD_QCH:BOOL=ON \
-	-DBUILD_WITH_QT6:BOOL=ON \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
-	-G Ninja
-
-%build
-%ninja_build -C build
-
-%install
-%ninja_install -C build
-
-%find_lang %{name} --all-name --with-html --with-man
 
 %files -f %{name}.lang
 %{_datadir}/dbus-1/system.d/*.conf
