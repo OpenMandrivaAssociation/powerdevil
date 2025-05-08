@@ -6,8 +6,8 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 Name: powerdevil
-Version: 6.3.4
-Release: %{?git:0.%{git}.}3
+Version: 6.3.5
+Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0: https://invent.kde.org/plasma/powerdevil/-/archive/%{gitbranch}/powerdevil-%{gitbranchd}.tar.bz2#/powerdevil-%{git}.tar.bz2
 %else
