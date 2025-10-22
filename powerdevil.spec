@@ -6,7 +6,7 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 Name: powerdevil
-Version: 6.4.5
+Version: 6.5.0
 Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0: https://invent.kde.org/plasma/powerdevil/-/archive/%{gitbranch}/powerdevil-%{gitbranchd}.tar.bz2#/powerdevil-%{git}.tar.bz2
@@ -90,10 +90,10 @@ KDE 6 Power Saving Tools.
 %{_qtdir}/plugins/kf6/krunner/krunner_powerdevil.so
 %{_qtdir}/qml/org/kde/plasma/private/batterymonitor
 %{_qtdir}/qml/org/kde/plasma/private/brightnesscontrolplugin
-%{_datadir}/metainfo/org.kde.plasma.battery.appdata.xml
-%{_datadir}/metainfo/org.kde.plasma.brightness.appdata.xml
-%{_datadir}/plasma/plasmoids/org.kde.plasma.battery
-%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness
 %{_datadir}/qlogging-categories6/batterymonitor.categories
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_mobile_power.so
 %{_datadir}/applications/kcm_mobile_power.desktop
+%{_libdir}/libexec/kf6/kauth/wakeupsourcehelper
+%{_qtdir}/plugins/plasma/applets/org.kde.plasma.battery.so
+%{_qtdir}/plugins/plasma/applets/org.kde.plasma.brightness.so
+%{_datadir}/polkit-1/actions/org.kde.powerdevil.wakeupsourcehelper.policy
