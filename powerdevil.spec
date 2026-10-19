@@ -20,6 +20,8 @@ Group: System/Libraries
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(Qt6)
 BuildRequires: cmake(Qt6Core)
+# The battery item test links Qt6::QuickTest. BUILD_TESTING defaults on.
+BuildRequires: cmake(Qt6QuickTest)
 BuildRequires: cmake(Qt6WaylandClient)
 BuildRequires: cmake(QCoro6)
 BuildRequires: cmake(PlasmaActivities)
