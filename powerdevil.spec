@@ -7,12 +7,14 @@
 
 Name: powerdevil
 Version: 6.8.1
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 %if 0%{?git:1}
 Source0: https://invent.kde.org/plasma/powerdevil/-/archive/%{gitbranch}/powerdevil-%{gitbranchd}.tar.bz2#/powerdevil-%{git}.tar.bz2
 %else
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/powerdevil-%{version}.tar.xz
 %endif
+# Fade the screen out through kwin_x11 before DPMS off. Wayland still turns off immediately.
+Patch0: powerdevil-6.8.1-x11-dpms-fade.patch
 Summary: KDE 6 Power Saving Tools
 URL: https://kde.org/
 License: GPL
@@ -53,6 +55,7 @@ BuildRequires: cmake(Plasma)
 BuildRequires: cmake(PlasmaQuick)
 BuildRequires: cmake(PlasmaWaylandProtocols)
 BuildRequires: pkgconfig(xrandr)
+BuildRequires: pkgconfig(xcb)
 BuildRequires: pkgconfig(libudev)
 BuildRequires: pkgconfig(libcap)
 BuildRequires: pkgconfig(xkbcommon)
