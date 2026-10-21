@@ -59,7 +59,7 @@ diff -ruN a/daemon/actions/bundled/dpms.cpp b/daemon/actions/bundled/dpms.cpp
  #include <QDBusMessage>
  #include <QDBusPendingCall>
  #include <QGuiApplication>
-+#include <QNativeInterface>
++#include <QtGui/qguiapplication_platform.h>
  #include <QTimer>
  
  #include <KActionCollection>
@@ -184,7 +184,7 @@ diff -ruN a/daemon/kwinkscreenhelpereffect.cpp b/daemon/kwinkscreenhelpereffect.
 +
 +#include <QCoreApplication>
 +#include <QGuiApplication>
-+#include <QNativeInterface>
++#include <QtGui/qguiapplication_platform.h>
 +#include <QScopedPointer>
 +
 +#include <chrono>
