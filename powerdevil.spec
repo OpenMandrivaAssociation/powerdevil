@@ -7,7 +7,7 @@
 
 Name: powerdevil
 Version: 6.8.2
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 %if 0%{?git:1}
 Source0: https://invent.kde.org/plasma/powerdevil/-/archive/%{gitbranch}/powerdevil-%{gitbranchd}.tar.bz2#/powerdevil-%{git}.tar.bz2
 %else
@@ -15,6 +15,11 @@ Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/powerdevil-%{vers
 %endif
 # Fade the screen out through kwin_x11 before DPMS off. Wayland still turns off immediately.
 Patch0: powerdevil-6.8.1-x11-dpms-fade.patch
+# On X11 there is no kde_external_brightness_v1, and KWin reports no
+# brightness-capable outputs, so the keys and the slider did nothing.
+# Drive the backlight and DDC displays directly in that case, and apply
+# dimming in setBrightness. Wayland still hands those displays to KWin.
+Patch1: powerdevil-6.8.2-x11-brightness.patch
 Summary: KDE 6 Power Saving Tools
 URL: https://kde.org/
 License: GPL

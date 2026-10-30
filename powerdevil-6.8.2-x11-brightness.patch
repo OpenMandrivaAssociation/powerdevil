@@ -1,0 +1,191 @@
+diff -Naur powerdevil-6.8.2/daemon/controllers/displaybrightness.h powerdevil-6.8.2.new/daemon/controllers/displaybrightness.h
+--- powerdevil-6.8.2/daemon/controllers/displaybrightness.h	2026-10-27 12:35:07.000000000 +0100
++++ powerdevil-6.8.2.new/daemon/controllers/displaybrightness.h	2026-10-30 18:36:32.981849963 +0100
+@@ -75,6 +75,16 @@
+      */
+     virtual void setDimmingMultiplier(double multiplier);
+ 
++    /**
++     * True when setDimmingMultiplier() changes the hardware brightness on its own.
++     * Devices that ignore it (the sysfs backlight and DDC displays) need the controller
++     * to multiply the value passed to setBrightness() instead.
++     */
++    virtual bool supportsDimmingMultiplier() const
++    {
++        return false;
++    }
++
+ Q_SIGNALS:
+     void externalBrightnessChangeObserved(DisplayBrightness *self, int brightness);
+ };
+diff -Naur powerdevil-6.8.2/daemon/controllers/kwinbrightness.h powerdevil-6.8.2.new/daemon/controllers/kwinbrightness.h
+--- powerdevil-6.8.2/daemon/controllers/kwinbrightness.h	2026-10-27 12:35:07.000000000 +0100
++++ powerdevil-6.8.2.new/daemon/controllers/kwinbrightness.h	2026-10-30 18:36:32.981849963 +0100
+@@ -29,6 +29,10 @@
+     bool isInternal() const override;
+     std::optional<QByteArray> edidData() const override;
+     void setDimmingMultiplier(double multiplier) override;
++    bool supportsDimmingMultiplier() const override
++    {
++        return true;
++    }
+ 
+     void applyPendingBrightness();
+     void setConfigOperationDone();
+diff -Naur powerdevil-6.8.2/daemon/controllers/screenbrightnesscontroller.cpp powerdevil-6.8.2.new/daemon/controllers/screenbrightnesscontroller.cpp
+--- powerdevil-6.8.2/daemon/controllers/screenbrightnesscontroller.cpp	2026-10-27 12:35:07.000000000 +0100
++++ powerdevil-6.8.2.new/daemon/controllers/screenbrightnesscontroller.cpp	2026-10-30 18:36:33.377854191 +0100
+@@ -119,31 +119,54 @@
+     m_sortedDisplayIds.clear();
+     QStringList legacyDisplayIds;
+ 
+-    // add new displays
++    // kde_external_brightness_v1 exists only on a Plasma Wayland session. While
++    // it is active, KWin owns every panel and the backlight must not be driven
++    // from here as well. On X11 the protocol never appears and KWin reports no
++    // brightness-capable outputs, so the backlight and DDC detectors have to be
++    // used directly, as they were in Plasma 6.7.
++    const bool externalControlActive = m_externalBrightnessController->isActive();
+     std::unordered_map<QString, DisplayInfo> newDisplayById;
+-    const QList<DisplayBrightness *> displays = m_detectors[0].detector->displays();
+-    for (DisplayBrightness *display : displays) {
+-        const QString displayId = display->id();
+-        auto &info = newDisplayById[displayId];
+-        info = DisplayInfo{
+-            .display = display,
+-            .detector = m_detectors[0].detector,
+-            .match =
+-                DisplayMatch{
+-                    .maxBrightness = display->maxBrightness(),
+-                    .isInternal = display->isInternal(),
+-                    .edidData = display->edidData(),
+-                },
+-        };
+-        info.brightnessLogic.setValueRange(display->knownSafeMinBrightness(), display->maxBrightness());
+-        info.brightnessLogic.setValue(display->brightness());
+-        m_sortedDisplayIds.push_back(displayId);
+-        legacyDisplayIds.append(displayId);
+-    }
+-
+     QList<DisplayBrightness *> newForExternalControl;
+-    for (const DetectorInfo &detectorInfo : m_detectors | std::views::drop(1)) {
+-        newForExternalControl.append(detectorInfo.detector->displays());
++    DisplayBrightnessDetector *legacyDetector = nullptr;
++
++    for (int detectorIndex = 0; detectorIndex < m_detectors.size(); ++detectorIndex) {
++        const DetectorInfo &detectorInfo = m_detectors.at(detectorIndex);
++        const QList<DisplayBrightness *> detectorDisplays = detectorInfo.detector->displays();
++        if (externalControlActive && detectorIndex != 0) {
++            newForExternalControl += detectorDisplays;
++            continue;
++        }
++        if (detectorDisplays.isEmpty()) {
++            continue;
++        }
++        if (!legacyDetector) {
++            legacyDetector = detectorInfo.detector;
++            qCDebug(POWERDEVIL) << "Using" << detectorInfo.debugName << "for brightness controls.";
++        }
++        for (DisplayBrightness *display : detectorDisplays) {
++            const QString displayId = display->id();
++            if (newDisplayById.contains(displayId)) {
++                qCWarning(POWERDEVIL) << "Skipping duplicate brightness display id" << displayId << "from" << detectorInfo.debugName;
++                continue;
++            }
++            auto &info = newDisplayById[displayId];
++            info = DisplayInfo{
++                .display = display,
++                .detector = detectorInfo.detector,
++                .match =
++                    DisplayMatch{
++                        .maxBrightness = display->maxBrightness(),
++                        .isInternal = display->isInternal(),
++                        .edidData = display->edidData(),
++                    },
++            };
++            info.brightnessLogic.setValueRange(display->knownSafeMinBrightness(), display->maxBrightness());
++            info.brightnessLogic.setValue(display->brightness());
++            m_sortedDisplayIds.push_back(displayId);
++            if (detectorInfo.detector == legacyDetector) {
++                legacyDisplayIds.append(displayId);
++            }
++        }
+     }
+ 
+     QStringList removedDisplayIds;
+@@ -175,6 +198,7 @@
+         } else {
+             // migrate any local state from the old element to its replacement
+             info.trackingError = it->second.trackingError;
++            info.dimmingRatio = it->second.dimmingRatio;
+         }
+         if (valueChanged) {
+             brightnessChangedDisplayIds.push_back(displayId);
+@@ -187,6 +211,23 @@
+     m_displaysById = std::move(newDisplayById);
+     m_externalBrightnessController->setDisplays(newForExternalControl);
+ 
++    // A dimming limit may already be in place when the backlight shows up on X11.
++    // KWin applies the multiplier itself. The backlight and DDC devices ignore
++    // setDimmingMultiplier(), so scale the hardware value here.
++    for (auto &[id, info] : m_displaysById) {
++        if (info.zombie || !info.display) {
++            continue;
++        }
++        const double ratio = dimmingRatioForDisplay(id);
++        if (info.display->supportsDimmingMultiplier()) {
++            info.display->setDimmingMultiplier(ratio);
++        } else if (ratio != info.dimmingRatio) {
++            const PowerDevil::BrightnessLogic::BrightnessInfo bi = info.brightnessLogic.info();
++            info.dimmingRatio = ratio;
++            info.display->setBrightness(brightnessMultiplied(bi.value, ratio, bi.valueMin));
++        }
++    }
++
+     for (const QString &removed : removedDisplayIds) {
+         Q_EMIT displayRemoved(removed);
+     }
+@@ -305,11 +346,15 @@
+         auto &[id, info] = *it;
+         const PowerDevil::BrightnessLogic::BrightnessInfo bi = info.brightnessLogic.info();
+         const int boundedValue = std::clamp(value, bi.valueMin, bi.valueMax);
++        const int hardwareValue = info.display->supportsDimmingMultiplier() ? boundedValue : brightnessMultiplied(boundedValue, info.dimmingRatio, bi.valueMin);
+ 
+-        qCDebug(POWERDEVIL) << "Set screen brightness of" << displayId << "to" << boundedValue << "/" << bi.valueMax;
++        qCDebug(POWERDEVIL) << "Set screen brightness of" << displayId << "to" << hardwareValue << "/" << bi.valueMax;
+         if (value != boundedValue) {
+             qCDebug(POWERDEVIL) << "- clamped from" << value;
+         }
++        if (hardwareValue != boundedValue) {
++            qCDebug(POWERDEVIL) << "- dimmed as" << boundedValue << "*" << info.dimmingRatio;
++        }
+ 
+         // notify only when the internally tracked brightness value is actually different
+         if (bi.value != boundedValue) {
+@@ -327,7 +372,7 @@
+         }
+ 
+         // but always call setBrightness() on the display, in case we're unaware of an external change
+-        info.display->setBrightness(boundedValue);
++        info.display->setBrightness(hardwareValue);
+     } else {
+         qCWarning(POWERDEVIL) << "Set screen brightness failed: no display with id" << displayId;
+     }
+@@ -446,7 +491,16 @@
+     qCDebug(POWERDEVIL) << "Set screen brightness dimming ratio with ID" << dimmingId << "to" << boundedRatio;
+ 
+     for (auto &[id, info] : m_displaysById) {
+-        info.display->setDimmingMultiplier(dimmingRatioForDisplay(id));
++        if (info.zombie || !info.display) {
++            continue;
++        }
++        const double newRatio = dimmingRatioForDisplay(id);
++        if (info.display->supportsDimmingMultiplier()) {
++            info.display->setDimmingMultiplier(newRatio);
++        } else if (info.dimmingRatio != newRatio) {
++            info.dimmingRatio = newRatio;
++            setBrightness(id, info.brightnessLogic.info().value, u"(internal)"_s, u"dimming"_s, SuppressIndicator);
++        }
+     }
+ }
+ 
