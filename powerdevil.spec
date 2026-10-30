@@ -45,12 +45,13 @@ BuildRequires: cmake(KF6KIO)
 BuildRequires: cmake(KF6Solid)
 BuildRequires: cmake(KF6NotifyConfig)
 BuildRequires: cmake(KF6IdleTime)
+BuildRequires: cmake(KScreenLocker) >= 6.8
 BuildRequires: cmake(ScreenSaverDBusInterface) >= 5.27.80
 BuildRequires: cmake(KF6Screen)
 BuildRequires: cmake(Wayland) >= 5.90.0
 BuildRequires: cmake(KF6Kirigami2)
 BuildRequires: cmake(KF6Runner)
-BuildRequires: cmake(LibKWorkspace) >= 5.27.80
+BuildRequires: cmake(LibKWorkspace) >= 6.8
 BuildRequires: cmake(KF6BluezQt)
 BuildRequires: cmake(KF6NetworkManagerQt)
 BuildRequires: cmake(KF6KCMUtils)
@@ -58,8 +59,9 @@ BuildRequires: cmake(KF6Auth)
 BuildRequires: cmake(KF6Notifications)
 BuildRequires: cmake(LayerShellQt)
 BuildRequires: cmake(DDCUtil)
-BuildRequires: cmake(Plasma)
-BuildRequires: cmake(PlasmaQuick)
+# Sonic also provides these names at 6.7. The version keeps that stack out.
+BuildRequires: cmake(Plasma) >= 6.8
+BuildRequires: cmake(PlasmaQuick) >= 6.8
 BuildRequires: cmake(PlasmaWaylandProtocols)
 BuildRequires: pkgconfig(xrandr)
 BuildRequires: pkgconfig(xcb)
