@@ -7,7 +7,7 @@
 
 Name: powerdevil
 Version: 6.8.2
-Release: %{?git:0.%{git}.}2
+Release: %{?git:0.%{git}.}3
 %if 0%{?git:1}
 Source0: https://invent.kde.org/plasma/powerdevil/-/archive/%{gitbranch}/powerdevil-%{gitbranchd}.tar.bz2#/powerdevil-%{git}.tar.bz2
 %else
@@ -29,6 +29,8 @@ BuildRequires: cmake(Qt6)
 BuildRequires: cmake(Qt6Core)
 # The battery item test links Qt6::QuickTest. BUILD_TESTING defaults on.
 BuildRequires: cmake(Qt6QuickTest)
+# Qt Qml no longer pulls this in. Without it, rpm emits no qml() dependencies.
+BuildRequires: rpm-provreq-qml
 BuildRequires: cmake(Qt6WaylandClient)
 BuildRequires: cmake(QCoro6)
 BuildRequires: cmake(PlasmaActivities)
